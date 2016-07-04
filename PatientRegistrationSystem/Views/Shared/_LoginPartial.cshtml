@@ -1,0 +1,34 @@
+﻿
+@if (HttpContext.Current.Session["User"] != null)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+    if(HttpContext.Current.Session["Role"]=="User"){
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Hello " + HttpContext.Current.Session["User"].ToString(), "FinalView", "Home", routeValues: new {arg = HttpContext.Current.Session["email"] }, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li>@Html.ActionLink("Logout","logout","Accounts")</li>
+    </ul>
+    }else if(HttpContext.Current.Session["Role"]=="Admin"){
+    
+        <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Appointments","Gpconsole","Accounts")</li>
+        <li>
+            @Html.ActionLink("Hello Dr. " + HttpContext.Current.Session["User"].ToString(), "Gpview", "Accounts", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li>@Html.ActionLink("Logout","logout","Accounts")</li>
+    </ul>
+        
+    }
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Login As User", "Login", "Accounts", routeValues: null, htmlAttributes: new { id = "userloginLink" })</li>
+        <li>@Html.ActionLink("Login As GP", "GpLogin", "Accounts", routeValues: null, htmlAttributes: new { id = "GploginLink" })</li>
+    </ul>
+}

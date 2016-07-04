@@ -1,0 +1,44 @@
+﻿@model PatientRegistrationSystem.Models.LoginModel
+
+@{
+    ViewBag.Title = "GpLogin";
+}
+
+<h2>GP Login</h2>
+
+@using (Html.BeginForm("GpLogin","Accounts")) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Enter The Login Details</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+
+
+        <br />
+        <p>
+            <input type="submit" value="Sign In" class="button" />
+        </p>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

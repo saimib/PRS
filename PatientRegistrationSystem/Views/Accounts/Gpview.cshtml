@@ -1,0 +1,131 @@
+﻿@model IEnumerable<PatientRegistrationSystem.Models.GpViewModel>
+
+
+@{
+   List<SelectListItem> listItems= new List<SelectListItem>();
+   listItems.Add(new SelectListItem
+        {
+          Text = "10 AM",
+          Value = "10 AM"
+        });
+   listItems.Add(new SelectListItem
+        {
+            Text = "12 PM",
+            Value = "12 PM",
+            Selected = true
+        });
+   listItems.Add(new SelectListItem
+        {
+            Text = "2 PM",
+            Value = "2 PM"
+        });
+
+   listItems.Add(new SelectListItem
+   {
+       Text = "4 PM",
+       Value = "4 PM"
+   });
+}
+
+
+
+@{
+    ViewBag.Title = "Gpview";
+}
+
+<h2>Appointment Requests</h2>
+
+
+
+    @foreach (var item in Model)
+    {
+        <div class="useritem">
+            @using(Html.BeginForm("Confirm","Accounts")){
+            
+<div class="row" id="wrap">
+    <div class="col-md-4">
+            <div class="editor-label">
+            <h4><b>@Html.DisplayNameFor(model => model.name)</b></h4>
+            </div>
+        <div class="editor-field">
+           @Html.DisplayFor(model => item.name)
+        </div>
+
+        <div class="editor-label">
+            <h4><b>@Html.DisplayNameFor(model => model.email)</b></h4>
+        </div>
+        <div class="editor-field">
+            <p>@Html.DisplayFor(model => item.email)</p>
+        </div>
+
+        <div class="editor-label">
+           <h4><b>@Html.DisplayNameFor(model => model.address)</b></h4>
+        </div>
+        <div class="editor-field">
+          @Html.DisplayFor(model => item.address)
+        </div>
+        </div>
+    <div class="col-md-4">
+
+        @Html.HiddenFor(model => item.id)
+
+        <div class="editor-label">
+            <h4><b>@Html.DisplayNameFor(model => model.DOB)</b></h4>
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => item.DOB)
+        </div>
+
+        <div class="editor-label">
+        <h4><b>@Html.DisplayNameFor(model => model.prefdate)</b></h4>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => item.prefdate)
+        </div>
+            
+        <div class="editor-label">
+        <h4><b>@Html.DisplayNameFor(model => model.time)</b></h4>
+        </div>
+        <div class="editor-field">
+           @Html.DropDownListFor(model => item.time, listItems, "-- Select Time --")
+        </div>
+           </div>
+
+    <div class="col-md-4">
+            <div>
+                <input type="submit" value="Confirm" class="button" style="margin-top:40px;" id="confirm"/>
+                <p class="grab" style="color:white">@Html.DisplayFor(model=>item.id)</p>
+            </div>
+        </div>
+        </div>
+                <hr />
+            }
+               
+            </div>
+    }
+
+<script type="text/jscript">
+
+    $(document).ready(function () {
+
+
+
+        $('#confirm').click(function () {
+            var url = "@Url.Action("updatedate")";
+            var name = $('#item_prefdate').val();
+            var some = $('#item_time').val();
+            var mail = $(".grab").html();
+           
+            $.ajax({
+
+                url: url,
+                type: 'GET',
+                data: { date: name , time : some, getit : mail},
+                datatype: "json"
+
+            });
+        });
+
+    });
+</script>
+

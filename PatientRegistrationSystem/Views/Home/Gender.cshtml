@@ -1,0 +1,32 @@
+﻿
+<br />
+<br />
+<h2 style="text-align:center">Please Select Gender</h2>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <img id="Female" style="float:right" src="~/Images/2.1.png" /></div>
+    <div class="col-md-6">
+        <img id="Male" src="~/Images/2.2.png" /></div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('img').click(function () {
+            var gen = $(this).attr("id");
+            alert(name);
+            //$.ajax({
+
+            //    url: url,
+            //    type: 'GET',
+            //    data: { date: name, time: some, getit: mail },
+            //    datatype: "json"
+
+            //});
+        });
+
+    });
+</script>

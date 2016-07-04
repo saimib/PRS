@@ -1,0 +1,49 @@
+﻿@model PatientRegistrationSystem.Models.GpViewModel
+
+@{
+    ViewBag.Title = "FinalView";
+}
+
+<h2>User Console</h2>
+<div class="row" id="wrap">
+    <div class="col-md-6">
+    <div class="display-label">
+        <h2><b>@Html.DisplayNameFor(model => model.name)</b></h2>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+        <h2><b>@Html.DisplayNameFor(model => model.email)</b></h2>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">
+        <h2><b>@Html.DisplayNameFor(model => model.address)</b></h2>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.address)
+    </div>
+        </div>
+    <div class="col-md-6">
+    <div class="display-label">
+        <h2><b>@Html.DisplayNameFor(model => model.DOB)</b></h2>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DOB)
+    </div>
+
+
+    <div class="display-label">
+        <h2><b>Preferred Date of Appointment</b></h2>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.prefdate)
+    </div>
+        </div>
+    </div>
+
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PatientRegistrationSystem.Models.GpViewModel>
+
+@{
+    ViewBag.Title = "Gpconsole";
+}
+
+<h2>Gpconsole</h2>
+
+@foreach(var item in Model){
+
+    
+    
+    <div class="row" id="wrap">
+        <div class="col-md-6">
+    <div class="display-label">
+         <h4><b>@Html.DisplayNameFor(model => model.name)</b></h4>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => item.name)
+    </div>
+
+    <div class="display-label">
+         <h4><b>@Html.DisplayNameFor(model => model.email)</b></h4>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => item.email)
+    </div>
+
+    <div class="display-label">
+         <h4><b>@Html.DisplayNameFor(model => model.address)</b></h4>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => item.address)
+    </div>
+            </div>
+        <div class="col-md-6">
+
+    <div class="display-label">
+        <h4><b>@Html.DisplayNameFor(model => model.DOB)</b></h4>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => item.DOB)
+    </div>
+
+    <div class="display-label">
+        <h4><b>@Html.DisplayNameFor(model => model.prefdate)</b></h4>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => item.prefdate)
+    </div>
+
+    <div class="display-label">
+         <h4><b>@Html.DisplayNameFor(model => model.time)</b></h4>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => item.time)
+    </div>
+            </div>
+        
+        </div>
+    
+    <hr>
+}

@@ -1,0 +1,74 @@
+﻿@model PatientRegistrationSystem.Models.UserProfile
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-6">
+<h2>New Patient Registration</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new {user = Model }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log In details</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.confirmpassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.confirmpassword)
+            @Html.ValidationMessageFor(model => model.confirmpassword)
+        </div>
+        <br />
+        <p>
+            <input type="submit" value="Create" class="button"/>
+        </p>
+    </fieldset>
+}
+
+        </div>
+    <div class="col-md-6">
+
+        <h2 style="margin-top:200px;margin-left:60px">Or</h2>
+
+      @using (Html.BeginForm("Index", "Accounts", FormMethod.Get))
+      { 
+        
+        <input type="submit"  class="button" value="Register As GP" />
+
+      }
+        
+
+    </div>
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

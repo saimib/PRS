@@ -28,5 +28,9 @@ namespace PatientRegistrationSystem.Models
         public DateTime CreatedDate { get; set; }
 
         public DateTime LastUpdatedDate { get; set; }
+
+        public virtual DoctorDetail DoctorDetail { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

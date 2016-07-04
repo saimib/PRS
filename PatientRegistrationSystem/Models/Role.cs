@@ -9,17 +9,21 @@ namespace PatientRegistrationSystem.Models
     [Table("Role")]
     public partial class Role
     {
-        [Key]
-        [Column(Order = 0)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Role()
+        {
+            Users = new HashSet<User>();
+        }
+
         public int RoleID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [Required]
         [StringLength(50)]
         public string RoleName { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
         public DateTime CreatedDate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

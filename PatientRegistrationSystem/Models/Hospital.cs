@@ -9,6 +9,12 @@ namespace PatientRegistrationSystem.Models
     [Table("Hospital")]
     public partial class Hospital
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Hospital()
+        {
+            DoctorDetails = new HashSet<DoctorDetail>();
+        }
+
         public Guid HospitalID { get; set; }
 
         [Required]
@@ -16,5 +22,8 @@ namespace PatientRegistrationSystem.Models
         public string HospitalName { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DoctorDetail> DoctorDetails { get; set; }
     }
 }

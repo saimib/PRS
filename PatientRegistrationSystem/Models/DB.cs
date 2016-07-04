@@ -8,7 +8,7 @@ namespace PatientRegistrationSystem.Models
     public partial class DB : DbContext
     {
         public DB()
-            : base("name=DB")
+            : base("name=DB1")
         {
         }
 
@@ -16,8 +16,8 @@ namespace PatientRegistrationSystem.Models
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<DoctorDetail> DoctorDetails { get; set; }
         public virtual DbSet<Hospital> Hospitals { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -29,9 +29,29 @@ namespace PatientRegistrationSystem.Models
                 .Property(e => e.Speciality)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<DoctorDetail>()
+                .HasMany(e => e.Appointments)
+                .WithRequired(e => e.DoctorDetail)
+                .HasForeignKey(e => e.DoctorID)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Hospital>()
                 .Property(e => e.HospitalName)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Hospital>()
+                .HasMany(e => e.DoctorDetails)
+                .WithRequired(e => e.Hospital)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Role>()
+                .Property(e => e.RoleName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Role>()
+                .HasMany(e => e.Users)
+                .WithRequired(e => e.Role)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.FirstName)
@@ -61,9 +81,17 @@ namespace PatientRegistrationSystem.Models
                 .Property(e => e.EMail)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Role>()
-                .Property(e => e.RoleName)
-                .IsUnicode(false);
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Appointments)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.PatientID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.DoctorDetails)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.DoctorID)
+                .WillCascadeOnDelete(false);
         }
     }
 }

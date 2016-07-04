@@ -9,6 +9,13 @@ namespace PatientRegistrationSystem.Models
     [Table("User")]
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            Appointments = new HashSet<Appointment>();
+            DoctorDetails = new HashSet<DoctorDetail>();
+        }
+
         public Guid UserID { get; set; }
 
         [Required]
@@ -44,5 +51,13 @@ namespace PatientRegistrationSystem.Models
         public string EMail { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointment> Appointments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DoctorDetail> DoctorDetails { get; set; }
+
+        public virtual Role Role { get; set; }
     }
 }

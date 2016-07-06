@@ -138,10 +138,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606271421368_InitialCreate.cs" />
-    <Compile Include="Migrations\201606271421368_InitialCreate.Designer.cs">
-      <DependentUpon>201606271421368_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
@@ -265,7 +261,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\Userdetails.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
@@ -274,21 +269,20 @@
     <Content Include="Views\Accounts\GpLogin.cshtml" />
     <Content Include="Views\Accounts\Gpview.cshtml" />
     <Content Include="Views\Home\FinalView.cshtml" />
-    <Content Include="Views\Home\Gender.cshtml" />
+    <Content Include="Views\Home\_gender.cshtml" />
     <Content Include="Views\Home\LevelPain.cshtml" />
     <Content Include="Views\Home\bodypart.cshtml" />
     <Content Include="Views\Accounts\Gpconsole.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_IndexPartial.cshtml" />
+    <Content Include="Views\Home\_Register.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606271421368_InitialCreate.resx">
-      <DependentUpon>201606271421368_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

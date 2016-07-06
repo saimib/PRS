@@ -8,12 +8,13 @@ using System.Web.Mvc;
 
 
 
-using System.Web.Providers.Entities;namespace PatientRegistrationSystem.Controllers
+using System.Web.Providers.Entities;
+namespace PatientRegistrationSystem.Controllers
 {
     public class HomeController : Controller
     {
 
-       
+
         //
         // GET: /Home/
 
@@ -25,100 +26,95 @@ using System.Web.Providers.Entities;namespace PatientRegistrationSystem.Controll
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(UserProfile userprof) {
+        //[HttpPost]
+        //public ActionResult Index(UserProfile userprof)
+        //{
 
-            if (ModelState.IsValid)
-            {
-                var temp = from r in db.UserProfiles where r.email == userprof.email select r.name;
-                var list = temp.ToList();
-              
-                if(list.Count() == 0)
-                {
-                db.UserProfiles.Add(userprof);
-                db.SaveChanges();
-                HttpContext.Session["User"] = userprof.name;
-                HttpContext.Session["Role"] = "User";
-                return RedirectToAction("Userdetails", "Home", new {arg = userprof.email });
-                }
-                else{
-                    
-                    ModelState.AddModelError("email","Email Id Already exists");
-                    return View();
-                
-                }
-            }
-            else
-                return RedirectToAction("Error", "Home");
-        
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        var temp = from r in db.UserProfiles where r.email == userprof.email select r.name;
+        //        var list = temp.ToList();
 
-        public ActionResult Gender() {
+        //        if (list.Count() == 0)
+        //        {
+        //            db.UserProfiles.Add(userprof);
+        //            db.SaveChanges();
+        //            HttpContext.Session["User"] = userprof.name;
+        //            HttpContext.Session["Role"] = "User";
+        //            return RedirectToAction("Userdetails", "Home", new { arg = userprof.email });
+        //        }
+        //        else
+        //        {
 
-            return View();
-        }
+        //            ModelState.AddModelError("email", "Email Id Already exists");
+        //            return View();
 
-        public ActionResult Error() {
+        //        }
+        //    }
+        //    else
+        //        return RedirectToAction("Error", "Home");
 
-            return View();
-        }
+        //}
 
-        [HttpGet]
-        public ActionResult Userdetails(string arg) {
-            if (HttpContext.Session["User"] != null)
-            {
-                ViewBag.email = arg;
-                return View();
-            }
-            else {
-                return RedirectToAction("Login", "Accounts");
-            }
+        //public ActionResult Gender()
+        //{
+
+        //    return View();
+        //}
+
+        //public ActionResult Error()
+        //{
+
+        //    return View();
+        //}
+
+        public ActionResult Register() {
+
+
+            return PartialView("_Register");
         }
 
 
         [HttpPost]
-        public ActionResult Userdetail(UserDetail userdet) {
+        public ActionResult Register(Models.User Model) {
 
-            if (ModelState.IsValid)
-            {
-                db.UserDetails.Add(userdet);
-                db.SaveChanges();
-                return RedirectToAction("FinalView", "Home", new { arg= userdet.email});
-            }
-            else {
+            db.Users.Add(Model);
 
-                return RedirectToAction("Error", "Home");
-            }
-        
+            db.SaveChanges();
+            return PartialView("_gender");
+
         }
 
-        public ActionResult FinalView(string arg) {
+        //public ActionResult FinalView(string arg)
+        //{
 
-            if (HttpContext.Session["user"] != null)
-            {
-                var model = (from r in db.UserDetails join z in db.UserProfiles on r.email equals z.email where r.email==arg && z.email==arg select new GpViewModel() { name=z.name, address=r.Address,email=r.email,DOB=r.DOB}).FirstOrDefault();
-                if (model != null)
-                {
-                    GpViewModel gp = new GpViewModel();
-                    gp.name = model.name;
-                    gp.address = model.address;
-                    gp.DOB = model.DOB;
-                    gp.email = model.email;
-                    return View(model);
-                }
-                else {
+        //    if (HttpContext.Session["user"] != null)
+        //    {
+        //        var model = (from r in db.UserDetails join z in db.UserProfiles on r.email equals z.email where r.email == arg && z.email == arg select new GpViewModel() { name = z.name, address = r.Address, email = r.email, DOB = r.DOB }).FirstOrDefault();
+        //        if (model != null)
+        //        {
+        //            GpViewModel gp = new GpViewModel();
+        //            gp.name = model.name;
+        //            gp.address = model.address;
+        //            gp.DOB = model.DOB;
+        //            gp.email = model.email;
+        //            return View(model);
+        //        }
+        //        else
+        //        {
 
-                    return RedirectToAction("Error", "Home");
-                
-                }
-            }
-            else {
-                return RedirectToAction("Login", "Accounts");
-            }
-        }
+        //            return RedirectToAction("Error", "Home");
+
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Login", "Accounts");
+        //    }
+        //}
 
 
-       
+
 
         protected override void Dispose(bool disposing)
         {

@@ -10,8 +10,14 @@ namespace PatientRegistrationSystem.Models
     public partial class C__MigrationHistory
     {
         [Key]
-        [StringLength(255)]
+        [Column(Order = 0)]
+        [StringLength(150)]
         public string MigrationId { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [StringLength(300)]
+        public string ContextKey { get; set; }
 
         [Required]
         public byte[] Model { get; set; }
